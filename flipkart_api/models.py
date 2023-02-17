@@ -44,36 +44,38 @@ class Product(models.Model):
 #         pass
 
 
-# class UserProfile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-#     class Meta:
-#         abstract = True
+    class Meta:
+        abstract = True
 
-# class Profile(UserProfile, models.Model):
-#     name = models.CharField(max_length=100)
 
-#     def pre_save(self):
-#         self.name = self.name.upper()
+class Profile(UserProfile, models.Model):
+    name = models.CharField(max_length=100)
 
-# class ProductOrder(models.Model):
-#     profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
-#     created_date = models.DateTimeField(auto_now_add=True)
-#     price = models.DecimalField(max_digits=10, decimal_places=2)
-#     customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    def pre_save(self):
+        self.name = self.name.upper()
 
-#     def save(self, *args, **kwargs):
-#         if not self.id:
-#             self.profile = self.customer
-#         super().save(*args, **kwargs)
 
-#     def __str__(self):
-#         return self.profile.name
+class ProductOrder(models.Model):
+    profile = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    created_date = models.DateTimeField(auto_now_add=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
 
-#     @staticmethod
-#     def total_price():
-#         total_price = ProductOrder.objects.aggregate(Sum('price'))['price__sum']
-#         return total_price
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.profile = self.customer
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.profile.name
+
+    @staticmethod
+    def total_price():
+        total_price = ProductOrder.objects.aggregate(Sum('price'))['price__sum']
+        return total_price
 
 
 # Added Mixin, Presave, Aggregate :
