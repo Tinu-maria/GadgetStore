@@ -1,0 +1,74 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+        <div class='column'>
+            <h3 class='mt-3'>{{product.name}}</h3>
+            <div>
+                <img class='mt-4' src={{product.image.url}} alt="..." height="200" width="300" />
+            </div>    
+            <p class='mt-3'>Rs. {{product.price}}</p>
+            <p class="center">{{product.description}}</p>
+
+            {% if product in cartlist %}
+              <a href="{% url 'cart_list' %}">
+                <button class="btn btn-secondary mb-3 ms-3">In-cart</button>
+              </a>
+            {% else %}
+              <form action="{% url 'detail' product.id %}" class="form-inline" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input class="btn btn-secondary ms-2" type="submit" value="Add to cart">
+              </form>
+            {% endif %}
+
+        </div>    
+        </div>
+    </div>
+</div>
+
+<style>
+
+    h2, h3 {
+      margin-top: 30px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    html {
+      height: 100%;
+    }
+
+    .col-6 {
+        text-align: left;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 650px;
+        padding: 10px 40px 40px 40px;
+        transform: translate(-50%, -50%);
+        background: white;
+        box-sizing: border-box;
+        box-shadow: 0 15px 25px rgba(0,0,0,.6);
+        border-radius: 10px;
+    }
+
+    .column {
+      padding: 5px;
+      text-align: center;
+    }
+
+    .center {
+        text-align: justify;
+        }
+
+    .input{
+      margin-left: 33.33%;
+      }
+
+    </style>
+    
+    {% endblock content %}

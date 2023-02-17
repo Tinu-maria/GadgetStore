@@ -1,0 +1,119 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="container">
+    <div class="row">
+      
+      <div class="col-4"></div>
+      <div class="col-8">
+        <form action="{% url 'search' %}" class="form-inline" method="get" >
+          <div class="column">
+            <input name="search" class="form-control" placeholder="Search...">
+          </div>
+          <button style="width:5%;" class="btn btn-outline-secondary mt-2 p-2" type="submit"><i class="fa fa-search"></i></button>
+          
+        </form>
+      </div>
+
+      {% for product in products %}
+          <div class='column'>
+            <div class="card me-3 mb-2" >
+              
+              <div class="center"> 
+                  <img class='mt-2' src={{product.image.url}} alt="..." height="200" width="250" />
+
+                {% if product in wishlist %}
+                <a href="{% url 'wishlist' %}">
+                  <button class="btn btn-outline-secondary mt-4 ms-2 p-2" disabled><i class="bi bi-heart-fill"></i></button>
+                </a>
+                {% else %}
+                <a href="{% url 'wish_add' product.id %}">
+                  <button class="btn btn-outline-secondary mt-4 ms-2 p-2"><i class="bi bi-heart"></i></button>
+                </a>
+                {% endif %}
+
+              </div>    
+
+              <div class="card-body">
+                <a href="{% url 'detail' product.id %}">
+                  <b>{{product.name}}</b>
+                </a> 
+                <p class="mb-0">Rs. {{product.price}}</p>    
+                <div class="center">   
+
+                </div>     
+              </div>
+            </div>      
+          </div>
+        {% endfor %}
+
+        <div class="center mb-3">
+          {%if products.has_previous%}
+            <a href="{% url 'list' %}?page={{products.previous_page_number}}">
+              <button type="button" class='btn btn-outline-secondary'>
+                <i class="bi bi-arrow-left"></i> Previous
+              </button>
+            </a>
+            <!-- <button type="button" class='btn btn-outline-secondary ms-2' disabled>
+              Pg {{products.number}} of {{ products.paginator.num_pages }} 
+            </button> -->
+          {%endif%}
+
+      
+          {%if products.has_next%}          
+          <!-- <button type="button" class='btn btn-outline-secondary me-2' disabled>
+            Pg {{products.number}} of {{ products.paginator.num_pages }} 
+          </button> -->
+          <a href="{% url 'list' %}?page={{products.next_page_number}}"> 
+            <button type="button" class='btn btn-outline-secondary'>
+              Next <i class="bi bi-arrow-right"></i>
+            </button>
+          </a>
+          {%endif%}
+          </div>
+
+    </div>
+  </div>
+
+<style>
+
+h2, h3 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+html {
+  height: 100%;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+  text-align: center;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    }
+
+.input{
+  margin-left: 33.33%;
+  }
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+a:hover, a:active {
+  color: gray;
+}
+
+</style>
+
+{% endblock content %}

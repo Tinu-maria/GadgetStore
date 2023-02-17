@@ -1,0 +1,82 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+      <div class="col-6">
+      <div class='column'>
+        <h3>Proceed to Pay</h3>
+        <p class="center">On Gadget Store, only Credit/Debit card payment methods are available for you to make payment.
+        You cannot choose to pay on delivery.</p>
+        <a href="" id="buy_now_btn"  class="btn btn-secondary">Pay with card</a>
+        <a href="{% url 'delivery' %}" class="btn btn-secondary ms-2">Back</a>        
+      </div>    
+      </div>
+  </div>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+  var stripe = Stripe('{{stripe_public_key}}');
+  const buy_now_button = document.querySelector('#buy_now_btn')
+
+  buy_now_button.addEventListener('click', event => {   
+
+    stripe.redirectToCheckout({
+    // Make the id field from the Checkout Session creation API response
+    // available to this file, so you can provide it as parameter here
+    // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+      sessionId: '{{session_id}}'
+    }).then(function (result) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `result.error.message`.
+    });
+  }) 
+
+</script>
+
+<style>
+
+  h2, h3 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  html {
+    height: 100%;
+  }
+
+  .col-6 {
+      text-align: left;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 650px;
+      padding: 10px 40px 40px 40px;
+      transform: translate(-50%, -50%);
+      background: white;
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0,0,0,.6);
+      border-radius: 10px;
+  }
+
+  .column {
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .center {
+      text-align: justify;
+      }
+  
+  .input{
+    margin-left: 33.33%;
+    }
+
+  </style>
+
+{% endblock content %}

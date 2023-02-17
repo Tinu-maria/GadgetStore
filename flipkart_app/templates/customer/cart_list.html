@@ -1,0 +1,74 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="row ">
+      <table class="mt-3">
+        <tr>
+          <th>Image</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+        {%for cart in carts%}       
+          <tr>
+            <td>
+              <a href="{% url 'detail' cart.product.id %}">
+                <img src="{{cart.product.image.url}}" alt="..." height="100" width="110" class="mt-3"/>
+              </a>
+            </td>
+            <td>{{cart.product.name}}</td>
+            <td>Rs. {{cart.product.price}}</td>
+            <td>{{cart.quantity}}</td> 
+            <td>{{cart.total_price}}</td> 
+            <td>
+              {%if cart.status != "order-placed"%}
+                <a href="{% url 'delivery' %}" class="btn btn-outline-secondary">CheckOut</a>
+              {%endif%}                
+
+              <a href="{% url 'cart_remove' id=cart.id %}" class="btn btn-outline-secondary ms-2">Remove</a>
+            </td>
+          </tr>        
+      {%endfor%}      
+      </table>  
+    </div>
+</div>
+
+<style>
+
+    h2, h3 {
+      margin-top: 30px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    html {
+      height: 100%;
+    }
+
+    .column {
+      padding: 5px;
+      text-align: center;
+    }
+
+    .center {
+        text-align: justify;
+       }
+
+    .input{
+      margin-left: 33.33%;
+      }
+
+    .col-3 {
+      float: left;
+    }
+    th, td {
+      text-align: center;
+    }
+
+</style>
+
+{% endblock content %}

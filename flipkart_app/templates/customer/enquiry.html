@@ -1,0 +1,47 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="login-box">
+    <h2>How Can We Help?</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="center">
+          <input type="submit"class="btn btn-secondary"/>
+        </div>
+    </form>
+</div>
+
+<style>
+    
+  html {
+    height: 100%;
+  }
+  
+  .login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 650px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: white;
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+  }
+  
+  .login-box h2,p {
+    text-align: center;
+  }
+  
+  .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      }
+  
+  </style>   
+  
+{% endblock content %}

@@ -1,0 +1,69 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="row mt-4">
+
+          {%for wish in wishs%}
+            <div class="col-2">
+              <a href="{% url 'detail' wish.product.id %}">
+                <img src="{{wish.product.image.url}}" alt="..." height="110" width="110" class="ms-3"/>
+              </a>
+            </div>
+            <div class="col-8">
+              <b>{{wish.product.name}}</b>
+              <div class="mt-2"><p>{{wish.product.description}}</p></div>
+            </div>
+            <div class="col-1">
+              <p></p>
+              <p>Rs. {{wish.product.price}}</p>
+            </div>
+            <div class="col-1">
+              <p></p>
+              <a href="{% url 'wish_remove' id=wish.id %}" class="btn btn-outline-secondary">x</a>
+            </div>
+          {%endfor%}
+
+    </div>
+</div>
+
+<style>
+
+    h2, h3 {
+      margin-top: 30px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    html {
+      height: 100%;
+    }
+
+    .column {
+      padding: 5px;
+      text-align: center;
+    }
+
+    .center {
+        align-items: center;
+       }
+
+    .input{
+      margin-left: 33.33%;
+      }
+
+    .col-3 {
+      float: left;
+    }
+
+    th, td {
+      text-align: justify;
+      padding-right: 2%;
+    }
+
+
+</style>
+
+{% endblock content %}
+
