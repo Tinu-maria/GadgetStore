@@ -1,8 +1,8 @@
 # Django
 *.pyc
 __pycache__/
+/.idea
 .venv
-.idea
 
 # Node
 node_modules/

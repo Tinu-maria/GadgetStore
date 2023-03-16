@@ -1,74 +1,128 @@
 {% extends 'customer/base.html' %}
 {% load static %}
 {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="container">
-    <div class="row">
-        <div class="col-6">
-        <div class='column'>
-            <h3 class='mt-3'>{{product.name}}</h3>
-            <div>
-                <img class='mt-4' src={{product.image.url}} alt="..." height="200" width="300" />
-            </div>    
-            <p class='mt-3'>Rs. {{product.price}}</p>
-            <p class="center">{{product.description}}</p>
+<div class="container mt-5">
+  <div class="row mt-2">
+    <div class="col-1"></div>
+      <div class="col-10">
 
-            {% if product in cartlist %}
-              <a href="{% url 'cart_list' %}">
-                <button class="btn btn-secondary mb-3 ms-3">In-cart</button>
-              </a>
-            {% else %}
-              <form action="{% url 'detail' product.id %}" class="form-inline" method="post">
-                {% csrf_token %}
-                {{ form }}
-                <input class="btn btn-secondary ms-2" type="submit" value="Add to cart">
-              </form>
-            {% endif %}
+            <div class="column1">
+              <img src={{product.image.url}} alt="..." height="200" width="200" />
+            </div>
+            
+            <div class="column2">
+              <h5 class="card-title mb-2">{{product.name}}</h5>      
+              
+              <!-- <div class="rating mb-2">
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div> -->
+                
+            <h5>₹ {{product.price}}</h5>
+            <p class="justify">{{product.description}}</p>
+          
+          <!--  if product in cartlist %}
+          <div class="d-grid gap-2">
+            <a href="{% url 'cart_list' %}">
+              <div class="d-grid gap-2">
+                <button class="btn btn-dark">In-cart</button>
+              </div>
+            </a>
+          </div>
+           else %} -->
+            
+                <form action="{% url 'detail' product.id %}" class="form-inline" method="post">
+                  {% csrf_token %}
+                  {{ form }}
+                <input class="btn btn-dark ms-3" type="submit" value="Add to cart">
+              </div>
+            </form>
+          <!--  endif %} -->
+           
+      </div>
+      <div class="col-2"></div>
 
-        </div>    
+  <section class="bg-light">
+    <div class="row text-center gy-3">
+        <div class="col-lg-4">
+            <div class="d-inline-block ms-5">
+                    <svg class="svg-icon svg-icon-big svg-icon-light">
+                        <use xlink:href="#delivery-time-1"></use>
+                    </svg>
+                    <div class="text-start">
+                        <h6 class="text-uppercase mb-1">Free shipping</h6>
+                        <p class="text-sm mb-3 text-muted">Free shipping worldwide</p>
+                    </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="d-inline-block">
+                    <svg class="svg-icon svg-icon-big svg-icon-light">
+                        <use xlink:href="#helpline-24h-1"></use>
+                    </svg>
+                    <div class="text-start">
+                        <h6 class="text-uppercase mb-1">24 x 7 service</h6>
+                        <p class="text-sm mb-3 text-muted">Free shipping worldwide</p>
+                    </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="d-inline-block">
+                    <svg class="svg-icon svg-icon-big svg-icon-light">
+                        <use xlink:href="#label-tag-1"></use>
+                    </svg>
+                    <div class="text-start">
+                        <h6 class="text-uppercase mb-1">Festival offers</h6>
+                        <p class="text-sm mb-3 text-muted">Free shipping worldwide</p>
+                    </div>
+            </div>
         </div>
     </div>
+</section>
+</div>
 </div>
 
-<style>
-
-    h2, h3 {
-      margin-top: 30px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
+<style> 
     
-    html {
-      height: 100%;
+  .card h4 {
+    text-align: center;
+  }
+
+  .card{
+  justify-content: center;
+  align-items: center;
+  }
+
+  .justify {
+    text-align: justify;
+  }
+
+  a{
+    text-decoration: none;
+  }
+  
+  .column1 {
+  float: left;
+  width: 30%;
+  padding: 5px;
+}
+
+.column2 {
+  float: left;
+  width: 70%;
+  padding: 5px;
+
+}
+
+.center {
+    display: flex;
+    justify-content: center;
     }
 
-    .col-6 {
-        text-align: left;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 650px;
-        padding: 10px 40px 40px 40px;
-        transform: translate(-50%, -50%);
-        background: white;
-        box-sizing: border-box;
-        box-shadow: 0 15px 25px rgba(0,0,0,.6);
-        border-radius: 10px;
-    }
-
-    .column {
-      padding: 5px;
-      text-align: center;
-    }
-
-    .center {
-        text-align: justify;
-        }
-
-    .input{
-      margin-left: 33.33%;
-      }
-
-    </style>
-    
-    {% endblock content %}
+  </style>
+{% endblock content %}

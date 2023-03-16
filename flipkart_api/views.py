@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
@@ -6,20 +5,17 @@ from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django.contrib.auth.models import User
-from rest_framework import generics
-from rest_framework.permissions import AllowAny
-from .serializers import ProductSerializer, RegisterSerializer, LoginSerializer
-from .models import Product
-from django.contrib.auth import authenticate, login
-from rest_framework import status
+from .serializers import ProductSerializer, UserSerializer, OrderSerializer, RatingSerializer
+from .models import Product, Rating
+from flipkart_app.models import Order
 
 # Create your views here.
 
 
 class CustomPagination(PageNumberPagination):
-    page_size = 6
+    page_size = 8
     page_size_query_param = 'page_size'
-    max_page_size = 6
+    max_page_size = 8
 
 
 class ProductView(APIView):
@@ -28,7 +24,7 @@ class ProductView(APIView):
     In POST: Creates a new products
     """
     def get(self, request, *args, **kwargs):
-        queryset = Product.objects.all()
+        queryset = Product.objects.all().order_by('id')
 
         paginator = CustomPagination()
         page = paginator.paginate_queryset(queryset, request)
@@ -95,20 +91,44 @@ class ProductSearchFilter(ListAPIView):
     serializer_class = ProductSerializer
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('name', )
+    
 
-
-class RegisterView(generics.CreateAPIView):
+class CustomerView(ModelViewSet):
+    """
+    Obtain list of all customers profile
+    """
     queryset = User.objects.all()
-    permission_classes = (AllowAny,)
-    serializer_class = RegisterSerializer
+    serializer_class = UserSerializer
 
 
-class LoginView(APIView):
-    permission_classes = (AllowAny,)
+class OrdersView(ModelViewSet):
+    """
+    Obtain list of all customers order
+    """
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    
 
-    def post(self, request, format=None):
-        serializer = LoginSerializer(data=self.request.data, context={'request': self.request})
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        login(request, user)
-        return Response(None, status=status.HTTP_202_ACCEPTED)
+class RatingView(ModelViewSet):
+    """
+    Get all the reviews of app and post your review
+    """
+    queryset = Rating.objects.all()
+    serializer_class = RatingSerializer
+        
+
+# class RegisterView(generics.CreateAPIView):
+#     queryset = User.objects.all()
+#     permission_classes = (AllowAny,)
+#     serializer_class = RegisterSerializer
+
+
+# class LoginView(APIView):
+#     permission_classes = (AllowAny,)
+
+#     def post(self, request, format=None):
+#         serializer = LoginSerializer(data=self.request.data, context={'request': self.request})
+#         serializer.is_valid(raise_exception=True)
+#         user = serializer.validated_data['user']
+#         login(request, user)
+#         return Response(None, status=status.HTTP_202_ACCEPTED)

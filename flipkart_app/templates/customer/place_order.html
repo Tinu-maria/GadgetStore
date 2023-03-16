@@ -1,0 +1,45 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row mt-5">
+    <div class="col-3"></div>
+      <div class="col-6">
+        <div class="card p-4">
+          <div class="card-body">
+            <h2 class="card-title mb-4">Add Delivery Address</h2>
+
+            <form action="" method="post">
+              {%csrf_token%}
+              {{form.as_p}}
+              <div class="center">
+                <button type="submit" class="btn btn-dark me-3">Proceed</button>
+                <a href="{% url 'checkout_proceed' %}" class="btn btn-dark">Back</a>        
+              </div>
+          </form>            
+          </div>
+        </div>
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </div>
+
+<style> 
+    
+    .card h2,p {
+      text-align: center;
+    }
+
+    .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    a{
+      text-decoration: none;
+    }
+
+    </style>
+{% endblock content %}

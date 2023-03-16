@@ -35,3 +35,5 @@ tzdata==2022.7
 urllib3==1.26.14
 vine==5.0.0
 wcwidth==0.2.6
+
+mitmproxy~=8.0.0

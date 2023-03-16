@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +10,11 @@
 <body>
     <div style="text-align: center; background-color: beige;">
 
-    <h2 style="color: brown; ">We have received your query</h2>
-    <p>Query : {{message}}</p>
-    <h3>Thanks for your query</h3>
+    <h2 style="color: brown; " class="mt-4">We have received your feedback</h2>
+    <hr class="m-4">
+    <p>{{message}}</p>
+    <hr class="m-4">
+    <h3 class="mb-4">Thanks for your feedback</h3>
 
     </div>
 </body>

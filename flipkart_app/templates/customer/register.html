@@ -1,38 +1,32 @@
 {% extends 'customer/base.html' %}
-
 {% block content %}
-<div class="login-box">
-  <h2>Register</h2>
-    <form action="" method="post">
-        {%csrf_token%}
-        {{form.as_p}}
-        <div class="center">
-            <button type="submit" class="btn btn-secondary mb-3">Register</button>
-        </div>
-        <p>Are you an existing customer? You can <a href="{% url 'signin' %}">Login</a> to your account here</p>
-    </form>
-</div>
 
-<style>
+<div class="container mt-5">
+  <div class="row mt-5">
+    <div class="col-4"></div>
+      <div class="col-4">
+        <div class="card p-4">
+          <div class="card-body">
+            <h2 class="card-title mb-4">Create Account</h2>
+
+            <form action="" method="post">
+              {%csrf_token%}
+              {{form.as_p}}
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-dark mb-3">Sign up</button>
+              </div>
+              <p>Already have an account? <a href="{% url 'signin' %}">Sign in</a></p>
+          </form>            
+          </div>
+        </div>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </div>
+
+<style> 
     
-    html {
-      height: 100%;
-    }
-    
-    .login-box {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 650px;
-      padding: 30px 40px 10px 40px;
-      transform: translate(-50%, -50%);
-      background: white;
-      box-sizing: border-box;
-      box-shadow: 0 15px 25px rgba(0,0,0,.6);
-      border-radius: 10px;
-    }
-    
-    .login-box h2,p {
+    .card h2,p {
       text-align: center;
     }
 
@@ -41,6 +35,10 @@
     justify-content: center;
     align-items: center;
     }
-    
+
+    a{
+      text-decoration: none;
+    }
+
     </style>
 {% endblock content %}

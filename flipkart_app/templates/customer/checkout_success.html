@@ -2,56 +2,42 @@
 {% load static %}
 {% block content %}
 
-<div class="container">
-  <div class="row">
+<div class="container mt-5">
+  <div class="row mt-5">
+    <div class="col-3"></div>
       <div class="col-6">
-      <div class='column'>
-        <h3>Payment successful</h3>
-        <p>Thankyou for purchasing the product</p>
-        <p>You can explore more products from gadget store</p>
-      </div>    
+        <div class="card p-4">
+          <div class="card-body">
+            <h2 class="card-title mb-4">Payment Successful</h2>
+            <i>Thankyou for purchasing the products from our store.</i>
+            <p class="mt-2">We will sent the shipping details to your email address.
+              You can continue shopping more products from our store.</p>
+
+              <div class="text-center">
+                <a href="{% url 'list' %}" class="btn btn-dark">Continue Shopping</a>
+              </div>
+              
+          </div>
+        </div>
       </div>
+      <div class="col-3"></div>
+    </div>
   </div>
 </div>
 
-<style>
-
-  h2, h3 {
-    margin-top: 30px;
-    margin-bottom: 20px;
+<style> 
+    
+  .card h2 {
     text-align: center;
   }
-  
-  html {
-    height: 100%;
+
+  .card p {
+    text-align: justify;
   }
 
-  .col-6 {
-      text-align: left;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 650px;
-      padding: 10px 40px 40px 40px;
-      transform: translate(-50%, -50%);
-      background: white;
-      box-sizing: border-box;
-      box-shadow: 0 15px 25px rgba(0,0,0,.6);
-      border-radius: 10px;
+  a{
+    text-decoration: none;
   }
-
-  .column {
-    padding: 5px;
-    text-align: center;
-  }
-  
-  .center {
-      align-items: center;
-      }
-  
-  .input{
-    margin-left: 33.33%;
-    }
 
   </style>
 

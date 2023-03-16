@@ -1,13 +1,34 @@
 from rest_framework import serializers
-from .models import Product
+from .models import Product, Rating
 from django.contrib.auth.models import User
-
+from flipkart_app.models import Order
 
 class ProductSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Product
         fields = ['id', 'image', 'name', 'price', 'description']
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = "__all__"
+
+
+class OrderSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Order
+        fields = "__all__"
+
+
+class RatingSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Rating
+        fields = "__all__"
 
 
 class RegisterSerializer(serializers.ModelSerializer):

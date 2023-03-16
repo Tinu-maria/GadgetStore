@@ -14,6 +14,10 @@ urlpatterns = [
     path('wishlist', views.WishListView.as_view(), name='wishlist'), 
     path('wish_remove/<int:id>', views.wish_remove, name='wish_remove'),
 
+    path('myorders', views.MyOrdersView.as_view(), name='myorders'), 
+    path('cancelorders/<int:id>', views.order_cancel, name='cancel_orders'), 
+    path('profile/<int:id>', views.ProfileView.as_view(), name='profile'), 
+
     path('enquiry', views.EnquiryView.as_view(), name='enquiry'),
     path('enquiry/success', views.enquiry_success, name='enquiry_success'),
 
@@ -21,7 +25,9 @@ urlpatterns = [
     path('login', views.LoginView.as_view(), name="signin"),
     path('logout', views.LogoutView.as_view(), name="signout"),
 
-    path('delivery', views.DeliveryView.as_view(), name="delivery"),
-    path('checkout', views.CheckoutPaymentView.as_view(), name='checkout'),
+    path('placeorder/<int:cid>/<int:pid>', views.PlaceOrderView.as_view(), name="place_order"),
+    path('checkout/', views.CheckoutPaymentView.as_view(), name='checkout'),
+    # path('checkout/<int:cid>', views.CheckoutPaymentView.as_view(), name='checkout'),
+    path('checkout/proceed', views.checkout_proceed, name='checkout_proceed'),
     path('checkout/success', views.checkout_success, name='checkout_success'),
 ]

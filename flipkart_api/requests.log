@@ -1,0 +1,15 @@
+DEBUG:root:Request URL: http://127.0.0.1:8000/api/product/1/
+DEBUG:root:Request headers: {'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'}
+DEBUG:root:Response status code: 200
+DEBUG:root:Response headers: {'Date': 'Fri, 10 Mar 2023 09:40:24 GMT', 'Server': 'WSGIServer/0.2 CPython/3.8.10', 'Content-Type': 'application/json', 'Vary': 'Accept, Origin, Cookie', 'Allow': 'GET, PUT, DELETE, HEAD, OPTIONS', 'X-Frame-Options': 'DENY', 'Content-Length': '308', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+DEBUG:root:Response content: b'{"id":1,"image":"/media/product_images/noise_ghApbs2.jpg","name":"Noise Pulse Go Buzz Smart Watch","price":1700,"description":"Noise Pulse Go Buzz Bluetooth Calling Smart Watch, 1.69\\" Clear Display, 550Nits,150+ Watch face, Comfort Strap, Heart Rate, Steps & Sleep Tracker, IP68, 7 Days Battery(Jet Black)"}'
+DEBUG:root:Request URL: http://127.0.0.1:8000/api/product/1/
+DEBUG:root:Request headers: {'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'}
+DEBUG:root:Response status code: 200
+DEBUG:root:Response headers: {'Date': 'Fri, 10 Mar 2023 09:52:14 GMT', 'Server': 'WSGIServer/0.2 CPython/3.8.10', 'Content-Type': 'application/json', 'Vary': 'Accept, Origin, Cookie', 'Allow': 'GET, PUT, DELETE, HEAD, OPTIONS', 'X-Frame-Options': 'DENY', 'Content-Length': '308', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+DEBUG:root:Response content: b'{"id":1,"image":"/media/product_images/noise_ghApbs2.jpg","name":"Noise Pulse Go Buzz Smart Watch","price":1700,"description":"Noise Pulse Go Buzz Bluetooth Calling Smart Watch, 1.69\\" Clear Display, 550Nits,150+ Watch face, Comfort Strap, Heart Rate, Steps & Sleep Tracker, IP68, 7 Days Battery(Jet Black)"}'
+DEBUG:root:Request URL: http://127.0.0.1:8000/api/product/1/
+DEBUG:root:Request headers: {'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive'}
+DEBUG:root:Response status code: 200
+DEBUG:root:Response headers: {'Date': 'Tue, 14 Mar 2023 05:30:03 GMT', 'Server': 'WSGIServer/0.2 CPython/3.8.10', 'Content-Type': 'application/json', 'Vary': 'Accept, Origin, Cookie', 'Allow': 'GET, PUT, DELETE, HEAD, OPTIONS', 'X-Frame-Options': 'DENY', 'Content-Length': '308', 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Cross-Origin-Opener-Policy': 'same-origin'}
+DEBUG:root:Response content: b'{"id":1,"image":"/media/product_images/noise_ghApbs2.jpg","name":"Noise Pulse Go Buzz Smart Watch","price":1700,"description":"Noise Pulse Go Buzz Bluetooth Calling Smart Watch, 1.69\\" Clear Display, 550Nits,150+ Watch face, Comfort Strap, Heart Rate, Steps & Sleep Tracker, IP68, 7 Days Battery(Jet Black)"}'

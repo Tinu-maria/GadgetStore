@@ -2,68 +2,116 @@
 {% load static %}
 {% block content %}
 
-<div class="container">
-    <div class="row mt-4">
+{% if not wishs %}
+          <h3 class="mt-5">Your Wishlist is Empty</h3>
+          <div class="text-center">
+            <a href="{% url 'list' %}" class="btn btn-dark">Continue Shopping</a>
+          </div>
+{% else %}
 
-          {%for wish in wishs%}
-            <div class="col-2">
-              <a href="{% url 'detail' wish.product.id %}">
-                <img src="{{wish.product.image.url}}" alt="..." height="110" width="110" class="ms-3"/>
-              </a>
-            </div>
-            <div class="col-8">
-              <b>{{wish.product.name}}</b>
-              <div class="mt-2"><p>{{wish.product.description}}</p></div>
-            </div>
-            <div class="col-1">
-              <p></p>
-              <p>Rs. {{wish.product.price}}</p>
-            </div>
-            <div class="col-1">
-              <p></p>
-              <a href="{% url 'wish_remove' id=wish.id %}" class="btn btn-outline-secondary">x</a>
-            </div>
-          {%endfor%}
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="card card-registration card-registration-2">
+          <div class="card-body p-0">
+            <div class="row g-0">
 
+                <div class="p-4">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h3 class="mb-0 ms-2 mt-0">My Wishlist</h3>
+                    <small class="fw-normal mt-3 me-2">{{request.user.wishlist_set.all.count}} ITEM</small>
+                  </div>
+                  <hr class="my-4">
+
+                  {%for wish in wishs%}
+                  <div class="row d-flex justify-content-between align-items-center">
+                    
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                      <img src="{{wish.product.image.url}}" class="img-fluid rounded-3" alt=".">
+                    </div>
+
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                      <a href="{% url 'detail' wish.product.id %}">
+                        <h6>{{wish.product.name}}</h6>
+                      </a>
+                    </div>
+
+                    <div class="col-md-5 col-lg-5 col-xl-5">
+                      <p class="me-3">{{wish.product.description}}</p>
+                    </div>
+
+                    <div class="col-md-1 col-lg-1 col-xl-1">
+                      <h6>₹ {{wish.product.price}}</h6>
+                    </div>
+                    
+                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                      <a href="{% url 'wish_remove' id=wish.id %}" class="me-4">
+                        <i class="bi bi-trash"></i>
+                      </a>
+                    </div>
+
+                  </div>
+
+                  {% endfor %}
+
+                </div>
+              </div>
+              </div>
+            </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+
+</section>
+{% endif %} 
 
 <style>
 
-    h2, h3 {
-      margin-top: 30px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
+  h2, h3 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
 
-    html {
-      height: 100%;
-    }
+  html {
+    height: 100%;
+  }
 
-    .column {
-      padding: 5px;
-      text-align: center;
-    }
+  .column {
+    padding: 5px;
+    text-align: center;
+  }
 
-    .center {
-        align-items: center;
-       }
-
-    .input{
-      margin-left: 33.33%;
-      }
-
-    .col-3 {
-      float: left;
-    }
-
-    th, td {
+  .center {
       text-align: justify;
-      padding-right: 2%;
+     }
+
+  .input{
+    margin-left: 33.33%;
     }
 
+  .col-3 {
+    float: left;
+  }
+  th, td {
+    text-align: center;
+  }
+
+  .bg-grey{
+    background-color: beige;
+  }
+
+  a{
+text-decoration: none;
+color: black;
+}
+
+a:hover, a:active {
+color: gray;
+}
 
 </style>
 
 {% endblock content %}
-
