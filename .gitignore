@@ -1,9 +1,0 @@
-# Django
-*.pyc
-__pycache__/
-/.idea
-.venv
-
-# Node
-node_modules/
-build/
