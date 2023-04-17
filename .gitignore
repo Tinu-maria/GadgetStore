@@ -1,9 +1,16 @@
-# Django
-*.pyc
-__pycache__/
-/.idea
-.venv
+# Ignore database files
+*.sqlite3
 
-# Node
-node_modules/
-build/
+# Ignore media files
+/media/
+
+# Ignore static files
+/static/
+
+venv/
+
+.idea/
+
+.vscode/
+
+__pycache__/
