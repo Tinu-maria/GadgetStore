@@ -7,15 +7,15 @@ urlpatterns = [
     path('product/<int:id>', views.ProductDetailView.as_view(), name='detail'),
     path('search', views.search_product, name='search'),
 
-    path('cart_list', views.CartListView.as_view(), name='cart_list'), 
-    path('cart_remove/<int:id>', views.cart_remove, name='cart_remove'),
+    path('mycart', views.CartListView.as_view(), name='cart_list'), 
+    path('remove-from-cart/<int:id>', views.cart_remove, name='cart_remove'),
 
-    path('wish_add/<int:id>', views.wish_add, name='wish_add'), 
-    path('wishlist', views.WishListView.as_view(), name='wishlist'), 
-    path('wish_remove/<int:id>', views.wish_remove, name='wish_remove'),
+    path('add-to-wishlist/<int:id>', views.wish_add, name='wish_add'), 
+    path('mywishlist', views.WishListView.as_view(), name='wishlist'), 
+    path('remove-from-wishlist/<int:id>', views.wish_remove, name='wish_remove'),
 
     path('myorders', views.MyOrdersView.as_view(), name='myorders'), 
-    path('cancelorders/<int:id>', views.order_cancel, name='cancel_orders'), 
+    path('orders/cancel/<int:id>', views.order_cancel, name='cancel_orders'), 
     path('profile/<int:id>', views.ProfileView.as_view(), name='profile'), 
 
     path('enquiry', views.EnquiryView.as_view(), name='enquiry'),

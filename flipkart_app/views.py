@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View, ListView, TemplateView, FormView
 from django.contrib.auth.models import User
-from flipkart_api.models import Product
+from flipkart_api.models import Product, UserProfile
 from .models import Cart, Wishlist, Order
 from .forms import RegisterForm, LoginForm, CartForm, OrderForm, EnquiryForm
 from django.contrib import messages
@@ -13,13 +13,13 @@ from django.conf import settings
 import stripe
 from django.urls import reverse
 from django.core.paginator import Paginator
-from django.urls import reverse_lazy
+# from django.urls import reverse_lazy
 
 # Create your views here.
 
 
 class HomeView(TemplateView):
-    template_name = 'customer/home.html'
+    template_name = 'main/home.html'
 
 
 @method_decorator(signin_required, name="dispatch")
@@ -28,7 +28,7 @@ class ProductListView(ListView):
     Returns list of all products along with context data for product and wishlist
     """
     model = Product
-    template_name = 'customer/product_list.html'
+    template_name = 'product/product_list.html'
 
     def get_context_data(self, **kwargs):
         product = Product.objects.all().order_by("id")
@@ -68,7 +68,7 @@ class ProductDetailView(View):
             for cart in cartlist_object:
                 cartlist.append(cart.product)
 
-        return render(request, 'customer/product_detail.html', {
+        return render(request, 'product/product_detail.html', {
             "form": CartForm(), "product": product, "cartlist": cartlist,
             })
 
@@ -94,7 +94,7 @@ def search_product(request):
     context = {
         'results': results,
     }
-    return render(request, 'customer/search.html', context)
+    return render(request, 'product/search.html', context)
 
 
 @method_decorator(signin_required, name="dispatch")
@@ -103,7 +103,7 @@ class CartListView(ListView):
     Returns list of products in cart that is not ordered 
     """
     model = Cart
-    template_name = "customer/cart_list.html"
+    template_name = "product/cart_list.html"
 
     def get_context_data(self, **kwargs):
         cart_object = Cart.objects.filter(user=self.request.user, ordered=False).order_by("-created_date")
@@ -136,7 +136,7 @@ def checkout_proceed(request):
     context = {
         "carts": cart_object,
     }
-    return render(request, 'customer/checkout_proceed.html', context)
+    return render(request, 'product/checkout_proceed.html', context)
 
 
 class PlaceOrderView(View):
@@ -146,7 +146,7 @@ class PlaceOrderView(View):
     """
     def get(self, request, *args, **kwargs):
         form = OrderForm()
-        return render(request, "customer/place_order.html", {"form": form})
+        return render(request, "product/place_order.html", {"form": form})
 
     def post(self, request, *args, **kwargs):
         cart_id = kwargs.get("cid")
@@ -167,7 +167,7 @@ class PlaceOrderView(View):
             cart.save()
             return redirect('checkout')
         else:
-            return render(request, "customer/place_order.html", {"form": form})
+            return render(request, "product/place_order.html", {"form": form})
             
 
 class CheckoutPaymentView(View):
@@ -208,14 +208,14 @@ class CheckoutPaymentView(View):
             'stripe_public_key' : settings.STRIPE_PUBLISHABLE_KEY
             }
         
-        return render(request, 'customer/checkout_payment.html', context)
+        return render(request, 'product/checkout_payment.html', context)
 
 
 def checkout_success(request):
     """
     Returns success page after payment
     """
-    return render(request, 'customer/checkout_success.html')
+    return render(request, 'product/checkout_success.html')
 
 
 def wish_add(request, *args, **kwargs):
@@ -247,7 +247,7 @@ class WishListView(ListView):
     Returns list of favorite products
     """
     model = Wishlist
-    template_name = "customer/wishlist.html"
+    template_name = "product/wishlist.html"
     context_object_name = "wishs"
 
     def get_queryset(self):
@@ -260,7 +260,7 @@ class MyOrdersView(ListView):
     Returns list of ordered products
     """
     model = Order
-    template_name = "customer/my_orders.html"
+    template_name = "product/my_orders.html"
     context_object_name = "orders"
 
     def get_queryset(self):
@@ -268,12 +268,12 @@ class MyOrdersView(ListView):
     
 
 class ProfileView(TemplateView):
-    template_name = 'customer/profile.html'
+    template_name = 'user/profile.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         id = kwargs.get("id")
-        profile = User.objects.get(id=id)
+        profile = UserProfile.objects.get(id=id)
         context["profile"] = profile
         return context
     
@@ -295,7 +295,7 @@ class EnquiryView(FormView):
     Sends a enquiry message using html email
     Celery is added to schedule time
     """
-    template_name = "customer/enquiry.html"
+    template_name = "main/enquiry.html"
     form_class = EnquiryForm
     success_url = "enquiry/success"
 
@@ -308,7 +308,7 @@ def enquiry_success(request):
     """
     Returns success page after enquiry
     """
-    return render(request, 'customer/enquiry_success.html')
+    return render(request, 'main/enquiry_success.html')
 
 
 class RegisterView(View):
@@ -318,7 +318,7 @@ class RegisterView(View):
     """
     def get(self, request, *args, **kwargs):
         form = RegisterForm()
-        return render(request, "customer/register.html", {"form": form})
+        return render(request, "user/register.html", {"form": form})
 
     def post(self, request, *args, **kwargs):
         form = RegisterForm(request.POST)
@@ -338,7 +338,7 @@ class LoginView(View):
     """
     def get(self, request, *args, **kwargs):
         form = LoginForm()
-        return render(request, "customer/login.html", {"form": form})
+        return render(request, "user/login.html", {"form": form})
 
     def post(self, request, *args, **kwargs):
         form = LoginForm(request.POST)
@@ -350,7 +350,7 @@ class LoginView(View):
                 login(request, user)
                 context = {'username': username}
                 messages.success(request, "Successfully logged in")
-                return render(request, "customer/home.html", context)
+                return render(request, "main/home.html", context)
             else:
                 messages.error(request, "Invalid credentials")
                 return redirect('signin')

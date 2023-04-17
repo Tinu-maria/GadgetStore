@@ -23,10 +23,11 @@ from django.contrib.sitemaps.views import sitemap
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     path('api/', include("flipkart_api.urls")),
     path('', include("flipkart_app.urls")),
-    path('sitemap.xml', sitemap, {'sitemaps': {'product' : SitemapView}},
-     name='django.contrib.sitemaps.views.sitemap'),
+
+    path('sitemap.xml', sitemap, {'sitemaps': {'product' : SitemapView}}, name='django.contrib.sitemaps.views.sitemap'),
     path('flatpages/', include('django.contrib.flatpages.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

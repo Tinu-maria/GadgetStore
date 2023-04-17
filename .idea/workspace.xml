@@ -5,42 +5,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05b831e9-32e8-421d-ad7c-a89798d96e31" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/main/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/main/enquiry.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/main/enquiry_success.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/main/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/product/checkout_payment.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/product/checkout_proceed.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/product/checkout_success.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/product/my_orders.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/product/place_order.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/product/product_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/product/product_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/product/search.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/product/wishlist.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/user/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flipkart_app/templates/user/profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/flipkartproject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/flipkartproject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_api/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_api/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_api/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_api/migrations/0002_uservalidity.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_api/migrations/0003_alter_uservalidity_date.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_api/migrations/0004_ordermodel_delete_uservalidity.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_api/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_api/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_api/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_app/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/static/logo1.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/static/logo2.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/static/logo3.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/cart_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/cart_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/checkout_payment.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/checkout_payment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/checkout_success.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/checkout_success.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/delivery.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/email.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/email.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/enquiry.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/enquiry.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/enquiry_success.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/enquiry_success.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/product_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/product_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/product_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/product_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/wishlist.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/customer/wishlist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/sitemap.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/sitemap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/cart_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/product/cart_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/checkout_payment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/checkout_proceed.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/checkout_success.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/email.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/main/email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/enquiry.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/enquiry_success.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/my_orders.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/place_order.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/product_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/product_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/search.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_app/templates/customer/wishlist.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_app/templates/flatpages/default.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/templates/flatpages/default.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_app/views.py" afterDir="false" />
@@ -48,21 +57,24 @@
       <change beforePath="$PROJECT_DIR$/flipkart_react/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_react/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkart_react/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/src/components/home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/src/components/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/logos/amazon-great-indian-festival-sale-best-deals-and-offers.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/logos/amazon-sale-mobile-offers-.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/logos/jpg.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/navigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/src/components/navigation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/product.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/product_detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/src/components/product_detail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/product_get.js" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/src/components/product_get.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/product_post.js" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/src/components/product_post.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/product_update.js" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/src/components/product_update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/about.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/css/product.css" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/src/components/css/product.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/customer.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/home.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/navigation.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/orders.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/product_detail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/product_get.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/product_post.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/product_update.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/components/ratingreview.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkart_react/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/flipkart_react/src/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flipkartproject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkartproject/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flipkartproject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/flipkartproject/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +96,8 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sayone/Desktop/Study/Projects/flipkartproject&quot;
+    &quot;last_opened_file_path&quot;: &quot;/home/sayone/Desktop/Study/Projects/flipkartproject&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -92,6 +105,8 @@
       <recent name="$PROJECT_DIR$/media" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/flipkart_app/templates/product" />
+      <recent name="$PROJECT_DIR$/flipkart_app/templates/user" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>

@@ -1,0 +1,142 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="container mt-5">
+  <div class="row mt-2">
+    <div class="col-1"></div>
+    <div class="col-10">
+
+      <div class="column1">
+        <img src={{product.image.url}} alt="..." height="200" width="200" />
+      </div>
+
+      <div class="column2">
+        <h5 class="card-title mb-2">{{product.name}}</h5>
+
+        <!-- <div class="rating mb-2">
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div> -->
+
+        <p class="about1 mb-1">Special Price</p>
+        <h4 class="mb-1">₹ {{product.price}}</h4>
+        <p class="about2">Hurry, Only few left!</p>
+        <p class="justify">Description : {{product.description}}</p>
+
+        {% if product.seller %}
+        <p class="justify">Seller : {{product.seller.first_name}} {{product.seller.last_name}}</p>
+        {% endif %}
+
+        <!--  if product in cartlist %}
+          <div class="d-grid gap-2">
+            <a href="{% url 'cart_list' %}">
+              <div class="d-grid gap-2">
+                <button class="btn btn-dark">In-cart</button>
+              </div>
+            </a>
+          </div>
+           else %} -->
+
+        <form action="{% url 'detail' product.id %}" class="form-inline" method="post">
+          {% csrf_token %}
+          {{ form }}
+          <input class="btn btn-dark ms-3" type="submit" value="Add to cart">
+      </div>
+      </form>
+      <!--  endif %} -->
+
+    </div>
+    <div class="col-2"></div>
+
+    <section class="bg-light">
+      <div class="row text-center gy-3">
+        <div class="col-lg-4">
+          <div class="d-inline-block ms-5">
+            <svg class="svg-icon svg-icon-big svg-icon-light">
+              <use xlink:href="#delivery-time-1"></use>
+            </svg>
+            <div class="text-start">
+              <h6 class="text-uppercase mb-1">Free shipping</h6>
+              <p class="text-sm mb-3 text-muted">Free shipping worldwide</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="d-inline-block">
+            <svg class="svg-icon svg-icon-big svg-icon-light">
+              <use xlink:href="#helpline-24h-1"></use>
+            </svg>
+            <div class="text-start">
+              <h6 class="text-uppercase mb-1">24 x 7 service</h6>
+              <p class="text-sm mb-3 text-muted">Free shipping worldwide</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="d-inline-block">
+            <svg class="svg-icon svg-icon-big svg-icon-light">
+              <use xlink:href="#label-tag-1"></use>
+            </svg>
+            <div class="text-start">
+              <h6 class="text-uppercase mb-1">Festival offers</h6>
+              <p class="text-sm mb-3 text-muted">Free shipping worldwide</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<style>
+  .card h4 {
+    text-align: center;
+  }
+
+  .card {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .justify {
+    text-align: justify;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .column1 {
+    float: left;
+    width: 30%;
+    padding: 5px;
+  }
+
+  .column2 {
+    float: left;
+    width: 70%;
+    padding: 5px;
+
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .about1 {
+    color: green;
+    font-size: smaller;
+  }
+
+  .about2 {
+    color: firebrick;
+    font-size: smaller;
+  }
+</style>
+{% endblock content %}

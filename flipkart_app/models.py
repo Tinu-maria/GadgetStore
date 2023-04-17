@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class Cart(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_date = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateField(auto_now_add=True)
     ordered = models.BooleanField(default=False)
     quantity = models.PositiveIntegerField(default=1)
 
@@ -28,11 +28,10 @@ class Wishlist(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     cart = models.ManyToManyField(Cart)
-
-    ordered_date = models.DateTimeField(auto_now_add=True)
+    ordered_date = models.DateField(auto_now_add=True)
 
     options= (
         ("Order-placed", "Order-placed"),
@@ -51,3 +50,4 @@ class Order(models.Model):
 
     def __str__(self):
         return self.product.name
+

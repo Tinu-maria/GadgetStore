@@ -1,0 +1,123 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+{% if not orders %}
+<h3 class="mt-5">Your Orders are Empty</h3>
+<div class="text-center">
+  <a href="{% url 'list' %}" class="btn btn-dark">Continue Shopping</a>
+</div>
+{% else %}
+
+<section class="h-100 h-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        <div class="card card-registration card-registration-2">
+          <div class="card-body p-0">
+            <div class="row g-0">
+
+              <div class="p-4">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h3 class="mb-0 ms-2 mt-0">My Orders</h3>
+                  <small class="fw-normal mt-3 me-2">{{request.user.order_set.all.count}} ITEM</small>
+                </div>
+                <hr class="my-4">
+
+                {%for order in orders%}
+                <div class="row d-flex justify-content-between align-items-center">
+
+                  <div class="col-md-2 col-lg-2 col-xl-2">
+                    <img src="{{order.product.image.url}}" class="img-fluid rounded-3" alt="." width="150px">
+                  </div>
+
+                  <div class="col-md-3 col-lg-3 col-xl-3">
+                    <a href="{% url 'detail' order.product.id %}">
+                      <h6>{{order.product.name}}</h6>
+                    </a>
+                  </div>
+
+                  <div class="col-md-1 col-lg-1 col-xl-1">
+                    <p>₹ {{order.product.price}}</p>
+                  </div>
+
+                  <div class="col-md-2 col-lg-2 col-xl-2">
+                    <p>{{order.status}}</p>
+                  </div>
+
+                  <div class="col-md-2 col-lg-2 col-xl-2">
+                    <p>{{order.ordered_date}}</p>
+                  </div>
+
+                  <div class="col-md-2 col-lg-2 col-xl-2 text-end">
+                    <a href="{% url 'cancel_orders' id=order.id %}">
+                      <button type="button" class="btn btn-dark mb-3">Cancel Order</button>
+                    </a>
+                  </div>
+
+                </div>
+
+                {% endfor %}
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</section>
+{% endif %}
+
+<style>
+  h2,
+  h3 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  html {
+    height: 100%;
+  }
+
+  .column {
+    padding: 5px;
+    text-align: center;
+  }
+
+  .center {
+    text-align: justify;
+  }
+
+  .input {
+    margin-left: 33.33%;
+  }
+
+  .col-3 {
+    float: left;
+  }
+
+  th,
+  td {
+    text-align: center;
+  }
+
+  .bg-grey {
+    background-color: beige;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  a:hover,
+  a:active {
+    color: gray;
+  }
+</style>
+
+{% endblock content %}
