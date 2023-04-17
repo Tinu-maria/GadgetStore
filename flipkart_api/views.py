@@ -5,9 +5,15 @@ from rest_framework.generics import ListAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django.contrib.auth.models import User
-from .serializers import ProductSerializer, UserSerializer, OrderSerializer, RatingSerializer
-from .models import Product, Rating
+from .serializers import ProductSerializer, UserProfileSerializer, UserSerializer, OrderSerializer, RatingSerializer, CategorySerializer, ProductFullSerializer, ChangePasswordSerializer, SavedProductSerializer
+from .models import Product, Rating, Category, UserProfile, SavedProduct
 from flipkart_app.models import Order
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import action
+from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
 
 # Create your views here.
 
@@ -16,6 +22,24 @@ class CustomPagination(PageNumberPagination):
     page_size = 8
     page_size_query_param = 'page_size'
     max_page_size = 8
+
+
+class ProductsViewset(ModelViewSet):
+    """
+    Viewset to get, post, update, delete a product
+    Get full details while taking detail of particuar product
+    """
+    queryset = Product.objects.all().order_by('id')
+    serializer_class = ProductSerializer
+    pagination_class = CustomPagination
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (AllowAny, )
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        seller = self.request.user
+        serializer = ProductFullSerializer(instance, many=False, context={'request': request, 'seller': seller})
+        return Response(serializer.data)
 
 
 class ProductView(APIView):
@@ -56,8 +80,8 @@ class ProductDetailView(APIView):
     def put(self, request, *args, **kwargs):
         id = kwargs.get("id")
 
-        import pdb
-        pdb.set_trace()
+        # import pdb
+        # pdb.set_trace()
         
         queryset = Product.objects.get(id=id)
         serializer = ProductSerializer(data=request.data, instance=queryset)
@@ -74,61 +98,103 @@ class ProductDetailView(APIView):
         return Response({"msg": "deleted"})
 
 
-class ProductsViewset(ModelViewSet):
-    """
-    Viewset to get, post, update, delete a product
-    """
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    pagination_class = CustomPagination
-
-
 class ProductSearchFilter(ListAPIView):
     """
-    Search product with name and order them by any fields
+    Search product with name and order them by name field
     """
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().order_by('id')
     serializer_class = ProductSerializer
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('name', )
-    
 
-class CustomerView(ModelViewSet):
+
+class CategoryViewset(ModelViewSet):
     """
-    Obtain list of all customers profile
+    Display category for all products
     """
-    queryset = User.objects.all()
+    queryset = Category.objects.all().order_by('id')
+    serializer_class = CategorySerializer
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (AllowAny, )
+
+
+class UserProfileViewset(ModelViewSet):
+    """
+    Obtain profile of current user
+    """
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+    # authentication_classes = (TokenAuthentication, )
+    # permission_classes = (IsAuthenticated, )
+
+
+class UserViewset(ModelViewSet):
+    """
+    Obtain list of all the main
+    Change current password and set new password
+    """
+    queryset = User.objects.all().order_by('id')
     serializer_class = UserSerializer
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (AllowAny, )
+
+    @action(methods=['PUT'], detail=True, serializer_class=ChangePasswordSerializer, permission_classes=[IsAuthenticated])
+    def change_password(self, request, pk):
+        user = User.objects.get(pk=pk)
+        serializer = ChangePasswordSerializer(data=request.data)
+        
+        if serializer.is_valid():
+            if not user.check_password(serializer.data.get('old_password')):
+                return Response({'message':'Wrong Password'}, status=status.HTTP_400_BAD_REQUEST)
+            user.set_password(serializer.data.get('new_password'))
+            user.save()
+            return Response({'message':'Password Updated'}, status=status.HTTP_200_OK)
 
 
-class OrdersView(ModelViewSet):
+class OrdersViewset(ModelViewSet):
     """
-    Obtain list of all customers order
+    Obtain list of all the orders by customers
     """
-    queryset = Order.objects.all()
+    queryset = Order.objects.all().order_by('id')
     serializer_class = OrderSerializer
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+
+
+class RatingViewset(ModelViewSet):
+    """
+    Post the review and get all the reviews
+    """
+    queryset = Rating.objects.all().order_by('id')
+    serializer_class = RatingSerializer
     
 
-class RatingView(ModelViewSet):
-    """
-    Get all the reviews of app and post your review
-    """
-    queryset = Rating.objects.all()
-    serializer_class = RatingSerializer
-        
+class CustomObtainAuthToken(ObtainAuthToken):
+    
+    def post(self, request, *args, **kwargs):
+        response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
+        token = Token.objects.get(key = response.data['token'])
+        user = User.objects.get(id = token.user_id)
+        serializer = UserSerializer(user, many=False)
+        return Response({'token': token.key, 'user': serializer.data})
+    
 
-# class RegisterView(generics.CreateAPIView):
-#     queryset = User.objects.all()
-#     permission_classes = (AllowAny,)
-#     serializer_class = RegisterSerializer
+class SavedProductView(APIView):
+    permission_classes = (AllowAny, )
+
+    def post(self, request, pk):
+        product = Product.objects.get(pk=pk)
+        saved_product = SavedProduct.objects.create(currentuser=request.user, product=product)
+        serializer = SavedProductSerializer(saved_product, many=False)
+        return Response(serializer.data)
+
+    def delete(self, request, pk):
+        product = Product.objects.get(pk=pk)
+        SavedProduct.objects.filter(currentuser=request.user, product=product).delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# class LoginView(APIView):
-#     permission_classes = (AllowAny,)
+class SavedProductViewset(ModelViewSet):
 
-#     def post(self, request, format=None):
-#         serializer = LoginSerializer(data=self.request.data, context={'request': self.request})
-#         serializer.is_valid(raise_exception=True)
-#         user = serializer.validated_data['user']
-#         login(request, user)
-#         return Response(None, status=status.HTTP_202_ACCEPTED)
+    queryset = SavedProduct.objects.all().order_by('id')
+    serializer_class = SavedProductSerializer

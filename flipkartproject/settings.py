@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'flipkart_api.apps.FlipkartApiConfig',
     'flipkart_app.apps.FlipkartAppConfig',
 
@@ -46,13 +47,19 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
 
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
+    
     'django_celery_results',
     'django_celery_beat',
     'django_fsm',
 ]
 
 SITE_ID = 1
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -106,10 +113,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

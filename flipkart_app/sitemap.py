@@ -1,5 +1,4 @@
 from django.contrib.sitemaps import Sitemap
-from django.shortcuts import reverse
 from flipkart_api.models import Product
 
 

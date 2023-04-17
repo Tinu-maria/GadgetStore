@@ -1,0 +1,64 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+
+        {% for res in results %}
+        <div class="column">
+            <div class="card me-4 mb-3">
+
+                <div class="center">
+                    <img src={{res.image.url}} alt="..." height="200" width="250" />
+                </div>
+
+                <h6>{{res.name}}</h6>
+                <p>{{res.price}}</p>
+            </div>
+        </div>
+        {% empty %}
+        <div class="center">
+            <h4 class="m-4">No results found</h4>
+        </div>
+        {% endfor %}
+
+        <div class="center">
+            <form action="{% url 'list' %}" class="form-inline" method="get">
+                <button type="submit" class="btn btn-dark">Back</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    h2,
+    h3 {
+        margin-top: 30px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    html {
+        height: 100%;
+    }
+
+    .column {
+        float: left;
+        width: 33.33%;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .input {
+        margin-left: 33.33%;
+    }
+</style>
+
+{% endblock content %}

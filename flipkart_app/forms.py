@@ -7,6 +7,7 @@ class CartForm(forms.Form):
     quantity = forms.IntegerField(
         label="Quantity ", widget=forms.NumberInput(attrs={'style': 'width:5ch', 'min': 1, 'max': 5})
     )
+    
 # class CartForm(forms.ModelForm):
 #     class Meta:
 #         model = Cart
@@ -71,5 +72,5 @@ class LoginForm(forms.Form):
         label="", widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter the Username"})
     )
     password = forms.CharField(
-        label="", widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter the Password"})
+        label="", widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter the Password", "type": "password"})
     )
