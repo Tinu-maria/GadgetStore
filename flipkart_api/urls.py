@@ -23,4 +23,13 @@ urlpatterns = [
     path('auth', obtain_auth_token), # here we get only token
     path('authenticate/', views.CustomObtainAuthToken.as_view()), # here we get user details along with token    
 
+    path('product/json', views.product_list),
+    path('product/json/<int:pk>', views.product_detail),
+    path('product/<int:pk>/category', views.CategoryList.as_view()),
+    path('product/<int:pk>/category-create', views.CategoryCreate.as_view()),
+    path('product/category/<int:pk>', views.CategoryDetail.as_view()),
+
+    path('review/<str:username>', views.RatingView.as_view()), # 1st method
+    path('review/', views.RatingView.as_view()), # 2nd method with ?username=tinu in url
+
 ] + router.urls

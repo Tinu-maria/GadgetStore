@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from . import views, tests
 
 urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
@@ -30,4 +30,10 @@ urlpatterns = [
     # path('checkout/<int:cid>', views.CheckoutPaymentView.as_view(), name='checkout'),
     path('checkout/proceed', views.checkout_proceed, name='checkout_proceed'),
     path('checkout/success', views.checkout_success, name='checkout_success'),
+    
+    
+    path("product-json", views.listing_product, name="product-json"),
+    path("scroll-more", views.ProductListView.as_view(template_name="pagination/scroll-more.html"), name="scroll-more"),
+    path("load-more", views.ProductListView.as_view(template_name="pagination/load-more.html"), name="load-more"),
+
 ]

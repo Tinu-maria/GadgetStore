@@ -1,0 +1,76 @@
+{% extends "pagination/base.html" %}
+
+{% block paginationcontent%}
+<div id="products"></div>
+{% endblock %}
+
+{% block pagination %}
+<div>
+    <a href="#" id="next">
+        Load more
+    </a>
+</div>
+
+<script>
+    async function getData(url, page, paginateBy) {
+        const urlWithParams = url + "?" + new URLSearchParams({
+            page: page,
+            per_page: paginateBy
+        })
+        const response = await fetch(urlWithParams);
+        return response.json();
+    }
+    // getData asynchronous function takes 3 parameters: url, page, paginateBy and
+    // this function constructs a URL with query parameters for pagination and 
+    // sends request to URL using the fetch function and returns the JSON response.
+
+    class LoadMorePaginator {
+        constructor(perPage) {
+            this.perPage = perPage
+            this.pageIndex = 1
+            this.container = document.querySelector("#products")
+            this.next = document.querySelector("#next")
+            this.next.addEventListener("click", this.onNextClick.bind(this))
+            this.loadMore()
+        }
+        // LoadMorePaginator class takes perPage as parameter in its constructor, which shows no of products per page. 
+        // then initializes the pageIndex variable to 1, i.e current page index. 
+        // container variable is assigned to DOM with ID-products, and next variable is assigned to DOM with ID-next.
+
+        onNextClick(event) {
+            event.preventDefault()
+            this.pageIndex++
+            this.loadMore()
+        }
+        // onNextClick method takes event parameter and prevents the default action. 
+        // then increments the pageIndex by 1 and calls the loadMore method to load the next page of products.
+
+        addElement(product) {
+            const pre = document.createElement("pre")
+            pre.append(product)
+            this.container.append(pre)
+        }
+        // addElement method takes a product parameter and creates a new <pre> element. 
+        // product is appended to <pre> element, and <pre> element is appended to the container element. This method adds a product element to the page.
+
+        loadMore() {
+            getData("{% url 'product-json' %}", this.pageIndex, this.perPage)
+                .then(response => {
+                    response.data.forEach((el) => {
+                        this.addElement(el.name)
+                        this.addElement(el.description)
+                        this.addElement(el.price)
+                    });
+                    this.next.style.display = !response.page.has_next ? "none" : "inline-block"
+                });
+        }
+        // loadMore method calls the getData function, passing URL, current pageIndex, perPage value. 
+        // then response data is iterated using the forEach method, and each products detail is passed to addElement method. 
+        // then next elements style is set to 'none' if there are no more pages response.page.has_next is false or 'inline-block'.
+    }
+
+    new LoadMorePaginator(4);
+    // here, an instance of the LoadMorePaginator class is created with a perPage value of 4.
+</script>
+
+{% endblock %}
