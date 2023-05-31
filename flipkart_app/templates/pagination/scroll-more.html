@@ -1,0 +1,94 @@
+{% extends "pagination/base.html" %}
+
+{% block paginationcontent%}
+<div id="products"></div>
+{% endblock %}
+
+{% block pagination %}
+
+<div id="loading">Loading...</div>
+
+<script>
+    async function getData(url, page, paginateBy) {
+        const urlWithParams = url + "?" + new URLSearchParams({
+            page: page,
+            per_page: paginateBy
+        })
+        const response = await fetch(urlWithParams);
+        return response.json();
+    }
+    // getData asynchronous function takes 3 parameters: url, page, paginateBy and
+    // this function constructs a URL with query parameters for pagination and 
+    // sends request to URL using the fetch function and returns the JSON response.
+
+    class ScrollMorePaginator {
+        constructor(perPage) {
+            this.perPage = perPage
+            this.pageIndex = 1
+            this.lastPage = false
+            this.container = document.querySelector("#products")
+            this.elements = document.querySelectorAll("pre")
+            this.loader = document.querySelector("#loading")
+            this.options = { // track scrolling and trigger loading
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.25 // 25% of the items are visible
+            }
+            this.loadMore()
+            this.watchIntersection()
+        }
+        // ScrollMorePaginator class takes perPage as parameter in the constructor.
+        // then initializes pageIndex, lastPage, and DOM elements like container, elements, loader.
+
+        onIntersect() {
+            if (!this.lastPage) {
+                this.pageIndex++
+                this.loadMore()
+            }
+        }
+        // onIntersect method is called when the intersection observer detects that loader element is visible  
+        // If it is not the last page, pageIndex is incremented, and loadMore method is called to fetch data.
+
+        addElement(product) {
+            const pre = document.createElement("pre")
+            pre.append(product)
+            this.container.append(pre)
+        }
+        // addElement method takes a product parameter and creates a new <pre> element. 
+        // product is appended to <pre> element, and <pre> element is appended to the container element. This method adds a product element to the page.
+
+
+        watchIntersection() {
+            document.addEventListener("DOMContentLoaded", () => {
+                const observer = new IntersectionObserver(this.onIntersect.bind(this),
+                    this.options);
+                observer.observe(this.loader);
+            })
+        }
+        // watchIntersection method sets intersection observer to monitor when loader element becomes visible. 
+        // Once the DOM content is loaded, the intersection observer is created 
+        // and configured to call the onIntersect method when the loader element intersects with the viewport.
+
+        loadMore() {
+            getData("{% url 'product-json' %}", this.pageIndex, this.perPage)
+                .then(response => {
+                    response.data.forEach((el) => {
+                        this.addElement(el.name)
+                        this.addElement(el.description)
+                        this.addElement(el.price)
+                    });
+                    this.loader.style.opacity = !response.page.has_next ? "0" : "1"
+                    this.lastPage = !response.page.has_next
+                });
+        }
+        // loadMore method calls the getData function, passing URL, current pageIndex, perPage value. 
+        // then response data is iterated using the forEach method, and each products detail is passed to addElement method. 
+        // then opacity of the loader element is adjusted based on whether there is a next page or not and the lastPage property is updated accordingly.
+    }
+
+    new ScrollMorePaginator(4);
+    // here, an instance of the ScrollMorePaginator class is created with a perPage value of 4.
+
+</script>
+  
+{% endblock %}

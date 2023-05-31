@@ -12,6 +12,9 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=profile_path_handler, blank=True, null=True)
     phone = models.PositiveIntegerField(default=987654321)
+    
+    def __str__(self):
+        return self.user.username
 
 
 class Product(models.Model):
@@ -60,6 +63,11 @@ class SavedProduct(models.Model):
     currentuser = models.ForeignKey(User, related_name='currentuser', on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, related_name='product', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.product.name
+    
+    
+# Task
 
 # class Addon(models.Model):
 #     product = models.OneToOneField(Product, on_delete=models.CASCADE)
@@ -70,12 +78,15 @@ class SavedProduct(models.Model):
 #         return self.product.name 
 
 
+# Study
+
 # from django_fsm import FSMField, transition
 # import datetime 
 # from django.db.models import Sum
 
 
 # 1
+
 # class UserValidityFsm(models.Model):
 #     state = FSMField(default="active")
 #     name = models.CharField(max_length=10)
@@ -101,6 +112,7 @@ class SavedProduct(models.Model):
 
 
 # 2
+
 # class ProfileMixin(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE)
 

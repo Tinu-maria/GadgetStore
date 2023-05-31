@@ -13,6 +13,7 @@ from django.conf import settings
 import stripe
 from django.urls import reverse
 from django.core.paginator import Paginator
+from django.http import JsonResponse
 # from django.urls import reverse_lazy
 
 # Create your views here.
@@ -364,3 +365,32 @@ class LogoutView(View):
     def get(self, request, *args, **kwargs):
         logout(request)
         return redirect("signin")
+
+
+class AllProductsView(ListView):
+    model = Product
+    template_name = "pagination/base.html"
+    
+    
+def listing_product(request):
+    per_page = request.GET.get("per_page", 2)
+    products = Product.objects.all().order_by("id")
+    paginator = Paginator(products, per_page)
+    
+    page_num = request.GET.get("page", 1)
+    page_obj = paginator.get_page(page_num)
+    
+    data = [
+        {"name": prod.name, "price": prod.price, "description": prod.description}
+        for prod in page_obj.object_list
+    ]
+
+    payload = {
+        "page": {
+            "current": page_obj.number,
+            "has_next": page_obj.has_next(),
+            "has_previous": page_obj.has_previous(),
+        },
+        "data": data,
+    }
+    return JsonResponse(payload)

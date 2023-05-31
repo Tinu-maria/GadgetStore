@@ -37,6 +37,8 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'category_name', 'seller')
 
 
+# Task
+
 # @admin.register(Addon)
 # class AddonAdmin(admin.ModelAdmin):
 #     list_filter = ('date', )
