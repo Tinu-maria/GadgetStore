@@ -6,6 +6,13 @@
 
 {% block pagination %}
 
+<style>
+    #loading {
+        transition: opacity 1s ease-out;
+        opacity: 1;
+    }
+</style>
+
 <div id="loading">Loading...</div>
 
 <script>
@@ -68,14 +75,22 @@
         // watchIntersection method sets intersection observer to monitor when loader element becomes visible. 
         // Once the DOM content is loaded, the intersection observer is created 
         // and configured to call the onIntersect method when the loader element intersects with the viewport.
-
+        
         loadMore() {
             getData("{% url 'product-json' %}", this.pageIndex, this.perPage)
                 .then(response => {
                     response.data.forEach((el) => {
-                        this.addElement(el.name)
-                        this.addElement(el.description)
-                        this.addElement(el.price)
+                        
+                        const nameLink = document.createElement('a');
+                        nameLink.textContent = el.name;
+
+                        nameLink.addEventListener('click', () => {
+                            window.location.href = `/product/${el.id}`;
+                        });                        
+                        this.addElement(nameLink);  
+
+                        {% comment %} const productInfo = `ID: ${el.id} | Name: ${el.name} | Price: ${el.price}`;
+                        this.addElement(productInfo);   {% endcomment %}
                     });
                     this.loader.style.opacity = !response.page.has_next ? "0" : "1"
                     this.lastPage = !response.page.has_next
@@ -84,11 +99,12 @@
         // loadMore method calls the getData function, passing URL, current pageIndex, perPage value. 
         // then response data is iterated using the forEach method, and each products detail is passed to addElement method. 
         // then opacity of the loader element is adjusted based on whether there is a next page or not and the lastPage property is updated accordingly.
+
     }
 
     new ScrollMorePaginator(4);
     // here, an instance of the ScrollMorePaginator class is created with a perPage value of 4.
 
 </script>
-  
+
 {% endblock %}

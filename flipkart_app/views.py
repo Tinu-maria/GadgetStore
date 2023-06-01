@@ -373,15 +373,16 @@ class AllProductsView(ListView):
     
     
 def listing_product(request):
+    page_num = request.GET.get("page", 1)
     per_page = request.GET.get("per_page", 2)
+    
     products = Product.objects.all().order_by("id")
     paginator = Paginator(products, per_page)
     
-    page_num = request.GET.get("page", 1)
     page_obj = paginator.get_page(page_num)
     
     data = [
-        {"name": prod.name, "price": prod.price, "description": prod.description}
+        {"id": prod.id, "name": prod.name, "price": prod.price, "description": prod.description}
         for prod in page_obj.object_list
     ]
 
