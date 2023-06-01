@@ -1,22 +1,11 @@
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-<body>
-{% block content %}
-    <h1>Products</h1>
-
-    {% block paginationcontent%}
-        
-    {% endblock %}
-
-    <nav>
-        {% block pagination %}
-            
-        {% endblock %}
-    </nav>
-{% endblock %}
-
-</body>
-
+<head>
+    <title>Product List</title>
+    <link rel="stylesheet" href="{% static 'simple.min.css' %}">
+</head>
 
 <style>
     nav {
@@ -32,3 +21,22 @@
         border-color: var(--bg);
     }
 </style>
+
+<body>
+{% block content %}
+    <h1>Products</h1>
+
+    {% block paginationcontent%}
+        {% for keyword in keyword_list %}
+            <pre>{{keyword}}</pre>
+        {% endfor %}       
+    {% endblock %}
+
+    <nav>
+        {% block pagination %}
+            
+        {% endblock %}
+    </nav>
+{% endblock %}
+
+</body>
